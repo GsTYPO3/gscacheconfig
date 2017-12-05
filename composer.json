@@ -1,0 +1,30 @@
+{
+	"name": "gilbertsoft/gscacheconfig",
+	"type": "typo3-cms-extension",
+	"description": "GS Cache Config allows you to switch various caching backends to APCu with fallback in case of CLI mode. Configuration can simply be adapted by the Extension Manager.",
+	"homepage": "https://github.com/gilbertsoft/typo3-gscacheconfig",
+	"license": ["GPL-3.0+"],
+	"keywords": ["TYPO3 CMS", "Gilbertsoft"],
+	"support": {
+		"issues": "https://github.com/gilbertsoft/typo3-gscacheconfig/issues"
+	},
+	"require": {
+		"typo3/cms": "^6.2 || ^7.6 || ^8.7 || ^9"
+	},
+	"autoload": {
+		"psr-4": {
+			"Gilbertsoft\\CacheConfig\\": "Classes"
+		}
+	},
+	"replace": {
+		"gscacheconfig": "self.version",
+		"typo3-ter/gscacheconfig": "self.version"
+	},
+	"extra": {
+		"typo3/cms": {
+			"Package": {
+				"partOfFactoryDefault": true
+			}
+		}
+	}
+}
