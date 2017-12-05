@@ -26,7 +26,6 @@ namespace Gilbertsoft\CacheConfig\Service;
  * Use declarations
  */
 use Gilbertsoft\Lib\Service\AbstractInstallService;
-use Gilbertsoft\Lib\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Configuration\ConfigurationManager;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -50,7 +49,7 @@ class InstallService extends AbstractInstallService
     protected function getConfigurationManager()
     {
         if (!isset($this->configurationManager)) {
-            $this->configurationManager = ObjectUtility::getConfigurationManager();
+            $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
         }
 
         return $this->configurationManager;
