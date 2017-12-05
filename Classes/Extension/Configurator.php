@@ -77,8 +77,13 @@ class Configurator extends AbstractConfigurator
      */
     protected static function setCacheBackend($backendClassName, $cacheName)
     {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName]['backend'] = $backendClassName;
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName]['options'] = [];
+        if (is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName])) {
+            $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName]['backend'] = $backendClassName;
+
+            if (is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName]['options'])) {
+                $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName]['options'] = [];
+            }
+        }
     }
 
     /**
@@ -96,9 +101,9 @@ class Configurator extends AbstractConfigurator
         $apcEnabled = ini_get('apc.enabled') == true;
 
         if (!$context->isDevelopment() && $apcAvailable && $apcEnabled) {
-            $backendClassName = $apcuExtensionLoaded ? BACKEND_APCU : BACKEND_APC;
+            $backendClassName = $apcuExtensionLoaded ? self::BACKEND_APCU : self::BACKEND_APC;
         } else {
-            $backendClassName = BACKEND_FILE;
+            $backendClassName = self::BACKEND_FILE;
         }
 
         self::setCacheBackend($backendClassName, 'cache_hash');
@@ -109,14 +114,14 @@ class Configurator extends AbstractConfigurator
         self::setCacheBackend($backendClassName, 'extbase_datamapfactory_datamap');
 
         if (self::isCli() && ($extConf['cachingCliFallbackExtbaseObject'] == 1)) {
-            self::setCacheBackend(BACKEND_FILE, 'extbase_object');
+            self::setCacheBackend(self::BACKEND_FILE, 'extbase_object');
         } else {
             self::setCacheBackend($backendClassName, 'extbase_object');
         }
 
         self::setCacheBackend($backendClassName, 'extbase_reflection');
-        //self::setCacheBackend($backendClassName, 'extbase_typo3dbbackend_queries');
-        //self::setCacheBackend($backendClassName, 'extbase_typo3dbbackend_tablecolumns');
+        self::setCacheBackend($backendClassName, 'extbase_typo3dbbackend_queries');
+        self::setCacheBackend($backendClassName, 'extbase_typo3dbbackend_tablecolumns');
     }
 
     /**
