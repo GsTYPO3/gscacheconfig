@@ -24,7 +24,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'GS Cache Config',
     'description' => 'GS Cache Config allows you to switch various caching backends to APCu with fallback in case of CLI mode. Configuration can simply be adapted by the Extension Manager.',
-    'version' => '0.0.1',
+    'version' => '0.0.2',
     'category' => 'misc',
     'constraints' => [
         'depends' => [
@@ -35,7 +35,7 @@ $EM_CONF[$_EXTKEY] = [
         'conflicts' => [],
         'suggests' => [],
     ],
-    'state' => 'alpha',
+    'state' => 'beta',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
