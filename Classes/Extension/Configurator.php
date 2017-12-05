@@ -108,7 +108,7 @@ class Configurator extends AbstractConfigurator
         self::setCacheBackend($backendClassName, 'cache_rootline');
         self::setCacheBackend($backendClassName, 'extbase_datamapfactory_datamap');
 
-        if (self::isCli() && ($extConf['cachingCliFallbackExtbaseObject'] == 1)) {}
+        if (self::isCli() && ($extConf['cachingCliFallbackExtbaseObject'] == 1)) {
             self::setCacheBackend(BACKEND_FILE, 'extbase_object');
         } else {
             self::setCacheBackend($backendClassName, 'extbase_object');
