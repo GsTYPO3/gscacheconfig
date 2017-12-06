@@ -95,10 +95,18 @@ class Configurator extends AbstractConfigurator
         // Override cache configuration
         $context = GeneralUtility::getApplicationContext();
 
+        if (self::isCli()) {
+            self::enableApcOnCli($extConf);
+        }
+
         $apcExtensionLoaded = extension_loaded('apc');
         $apcuExtensionLoaded = extension_loaded('apcu');
         $apcAvailable = $apcExtensionLoaded || $apcuExtensionLoaded;
         $apcEnabled = ini_get('apc.enabled') == true;
+
+        if (self::isCli()) {
+            $apcEnabled = $apcEnabled && ini_get('apc.enable_cli') == true;
+        }
 
         if (!$context->isDevelopment() && $apcAvailable && $apcEnabled) {
             $backendClassName = $apcuExtensionLoaded ? self::BACKEND_APCU : self::BACKEND_APC;
@@ -122,6 +130,21 @@ class Configurator extends AbstractConfigurator
         self::setCacheBackend($backendClassName, 'extbase_reflection');
         self::setCacheBackend($backendClassName, 'extbase_typo3dbbackend_queries');
         self::setCacheBackend($backendClassName, 'extbase_typo3dbbackend_tablecolumns');
+    }
+
+
+    /**
+     * Enables the use of APC on CLI
+     *
+     * @param array $extConf Extension configuration array
+     * @return void
+     * @throws \RuntimeException
+     */
+    protected static function enableApcOnCli($extConf)
+    {
+        if (!ini_get('apc.enable_cli')) {
+            ini_set('apc.enable_cli', '1');
+        }
     }
 
     /**
