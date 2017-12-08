@@ -1,7 +1,7 @@
 # cat=caching; type=boolean; label=Enable caching configuration:Check to enable the following configurations.
 cachingConfigEnable = 1
 
-# cat=caching; type=boolean; label=Enable caching optimization:Check to enable the caching optimization and set the caching backends to APCu or APC and File as fallbacks.
+# cat=caching; type=boolean; label=Enable caching optimization:Check to enable the caching optimization and set the caching backends to APCu with APC and File as fallbacks.
 cachingOptimizationEnable = 1
 
 # cat=caching; type=boolean; label=Fallback of ExtbaseObject in CLI mode:Check to enable the fallback to File of ExtbaseObject cache in CLI mode.
