@@ -75,9 +75,9 @@ class Configurator extends AbstractConfigurator
      * @param string $cacheName Cache name
      * @return void
      */
-    protected static function setCacheBackend($backendClassName, $cacheName)
+    protected static function setCacheBackend($backendClassName, $cacheName, $force = false)
     {
-        if (is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName])) {
+        if ($force || is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName])) {
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName]['backend'] = $backendClassName;
 
             if (is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cacheName]['options'])) {
