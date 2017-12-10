@@ -130,8 +130,6 @@ class Configurator extends AbstractConfigurator
         self::setCacheBackend($backendClassName, 'extbase_reflection');
         self::setCacheBackend($backendClassName, 'extbase_typo3dbbackend_queries');
         self::setCacheBackend($backendClassName, 'extbase_typo3dbbackend_tablecolumns');
-
-        self::setCacheBackend($backendClassName, 'aimeos', true);
     }
 
 
