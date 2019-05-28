@@ -4,5 +4,8 @@ cachingConfigEnable = 1
 # cat=caching; type=boolean; label=Enable caching optimization:Check to enable the caching optimization and set the caching backends to APCu with APC and File as fallbacks.
 cachingOptimizationEnable = 1
 
+# cat=caching; type=options[None=0,Development=1,Testing=2,Development/Testing=3,Production=4,Development/Production=5,Testing/Production=6]; label=Exclude from optimization:Select the application contexts to exclude from the optimization.
+cachingContextExclude = 1
+
 # cat=caching; type=boolean; label=Fallback of ExtbaseObject in CLI mode:Check to enable the fallback to File of ExtbaseObject cache in CLI mode.
 cachingCliFallbackExtbaseObject = 1
