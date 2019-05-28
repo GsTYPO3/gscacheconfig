@@ -28,9 +28,9 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'misc',
     'constraints' => [
         'depends' => [
-            'php' => '5.6.0-0.0.0',
-            'typo3' => '6.2.0-8.9.99',
-            'gslib' => '0.0.5-0.0.0',
+            'php' => '7.1.0-0.0.0',
+            'typo3' => '8.7.0-9.5.99',
+            'gslib' => '0.0.9-0.0.0',
         ],
         'conflicts' => [],
         'suggests' => [],

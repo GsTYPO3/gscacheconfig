@@ -9,7 +9,8 @@
 		"issues": "https://github.com/gilbertsoft/typo3-gscacheconfig/issues"
 	},
 	"require": {
-		"typo3/cms-core": "^6.2.0 || ^7.6.0 || ^8.7.0 || ^9"
+		"typo3/cms-core": "^8.7 || ^9.5",
+		"gilbertsoft/typo3-gslib": "*"
 	},
 	"autoload": {
 		"psr-4": {
