@@ -4,7 +4,7 @@ namespace Gilbertsoft\CacheConfig\Extension;
 /*
  * This file is part of the "GS Cache Config" Extension for TYPO3 CMS.
  *
- * Copyright (C) 2017 by Gilbertsoft (gilbertsoft.org)
+ * Copyright (C) 2017-2019 by Gilbertsoft (gilbertsoft.org)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@ namespace Gilbertsoft\CacheConfig\Extension;
  */
 use Gilbertsoft\Lib\Extension\AbstractConfigurator;
 use Gilbertsoft\CacheConfig\Service\InstallService;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -45,8 +46,9 @@ class Configurator extends AbstractConfigurator
     const BACKEND_APCU = \TYPO3\CMS\Core\Cache\Backend\ApcuBackend::class;
 
     /**
-     * @param string $string String to be converted to lowercase underscore
-     * @return string lowercase_and_underscored_string
+     * @param array $conf Extension configuration
+     * @param string $value Configuration value to check and set to default if not set
+     * @param $default Default value to set as default if not set
      */
     protected static function sanitizeValue(array &$conf, $value, $default)
     {
@@ -61,7 +63,7 @@ class Configurator extends AbstractConfigurator
      */
     protected static function getSanitizedExtConf($extensionKey)
     {
-        $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extensionKey]);
+        $conf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get($extensionKey);
 
         self::sanitizeValue($conf, 'cachingConfigEnable', true);
         self::sanitizeValue($conf, 'cachingOptimizationEnable', true);
