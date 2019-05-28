@@ -4,7 +4,7 @@ namespace Gilbertsoft\CacheConfig\Service;
 /*
  * This file is part of the "GS Cache Config" Extension for TYPO3 CMS.
  *
- * Copyright (C) 2017 by Gilbertsoft (gilbertsoft.org)
+ * Copyright (C) 2017-2019 by Gilbertsoft (gilbertsoft.org)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -65,8 +65,7 @@ class InstallService extends AbstractInstallService
         $newLines = [];
 
         // Load content and search for the include
-        if (($content = GeneralUtility::getUrl($this->getConfigurationManager()->getAdditionalConfigurationFileLocation())) !== false)
-        {
+        if (($content = GeneralUtility::getUrl($this->getConfigurationManager()->getAdditionalConfigurationFileLocation())) !== false) {
             $currentLines = explode(LF, $content);
 
             // Delete the php marker line
@@ -76,8 +75,7 @@ class InstallService extends AbstractInstallService
             $startFound = false;
             $endFound = false;
 
-            foreach ($currentLines as $line)
-            {
+            foreach ($currentLines as $line) {
                 if (($startFound) && (!$endFound)) {
                     $endFound = (strpos($line, '}') !== false);
                 } elseif ((!$startFound) && (strpos($line, $extensionKey) !== false)) {
@@ -94,8 +92,7 @@ class InstallService extends AbstractInstallService
         $newLines = [];
         $lineFound = false;
 
-        foreach ($revLines as $line)
-        {
+        foreach ($revLines as $line) {
             if ($lineFound || !empty(trim($line))) {
                 $newLines[] = $line;
                 $lineFound = true;
@@ -160,8 +157,7 @@ class InstallService extends AbstractInstallService
     {
         $newLines = $this->getCleanAdditionalConfiguration($extensionKey);
 
-        if (empty($newLines) !== true)
-        {
+        if (empty($newLines) !== true) {
             $this->getConfigurationManager()->writeAdditionalConfiguration($newLines);
 
             /**
@@ -175,9 +171,7 @@ class InstallService extends AbstractInstallService
                 FlashMessage::OK,
                 true
             );
-        }
-        else
-        {
+        } else {
             unlink($this->getConfigurationManager()->getAdditionalConfigurationFileLocation());
 
             /**
@@ -199,8 +193,7 @@ class InstallService extends AbstractInstallService
      */
     public function afterInstall($extensionKey)
     {
-        if ($extensionKey == $this->extensionKey)
-        {
+        if ($extensionKey == $this->extensionKey) {
             $this->updateAdditionalConfiguration($extensionKey);
         }
     }
@@ -212,8 +205,7 @@ class InstallService extends AbstractInstallService
      */
     public function afterUninstall($extensionKey)
     {
-        if ($extensionKey == $this->extensionKey)
-        {
+        if ($extensionKey == $this->extensionKey) {
             $this->removeAdditionalConfiguration($extensionKey);
         }
     }
