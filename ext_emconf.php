@@ -3,7 +3,7 @@
 /*
  * This file is part of the "GS Cache Config" Extension for TYPO3 CMS.
  *
- * Copyright (C) 2017 by Gilbertsoft (gilbertsoft.org)
+ * Copyright (C) 2017-2019 by Gilbertsoft (gilbertsoft.org)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

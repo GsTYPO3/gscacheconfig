@@ -27,7 +27,6 @@ namespace Gilbertsoft\CacheConfig\Extension;
  */
 use Gilbertsoft\Lib\Extension\AbstractConfigurator;
 use Gilbertsoft\CacheConfig\Service\InstallService;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -63,7 +62,11 @@ class Configurator extends AbstractConfigurator
      */
     protected static function getSanitizedExtConf($extensionKey)
     {
-        $conf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get($extensionKey);
+        if (class_exists('TYPO3\CMS\Core\Configuration\ExtensionConfiguration')) {
+            $conf = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get($extensionKey);
+        } else {
+            $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extensionKey]);
+        }
 
         self::sanitizeValue($conf, 'cachingConfigEnable', true);
         self::sanitizeValue($conf, 'cachingOptimizationEnable', true);
