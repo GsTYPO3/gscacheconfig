@@ -63,9 +63,14 @@ class Configurator extends AbstractConfigurator
     protected static function getSanitizedExtConf($extensionKey)
     {
         if (class_exists('TYPO3\CMS\Core\Configuration\ExtensionConfiguration')) {
-            $conf = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get($extensionKey);
+            try {
+                $conf = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get($extensionKey);
+            } catch (\TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException $e) {
+                $conf = [];
+            }
         } else {
             $conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extensionKey]);
+            $conf = $conf ?? [];
         }
 
         self::sanitizeValue($conf, 'cachingConfigEnable', true);
